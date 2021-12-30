@@ -1,1 +1,0 @@
-export { crud } from "./methods";

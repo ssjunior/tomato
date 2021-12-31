@@ -1,10 +1,11 @@
 import { Route, Routes as ReactRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import { Login } from "@tomato/core";
+
+import { Forbidden, Page404 } from "../views";
 import { LAYOUTS } from "../layouts";
 import { ROUTES } from "./routes";
-import { VIEWS } from "../views";
-
-export * from "./routes";
 
 const Element = ({ route }) => {
   const user = useSelector((state) => state["account"].user);
@@ -16,11 +17,10 @@ const Element = ({ route }) => {
   const View = view;
 
   const isAdmin = admin === true || false;
-  if (isAdmin && (!user || (user && !user.is_admin)))
-    return VIEWS["Forbidden"]();
+  if (isAdmin && (!user || (user && !user.is_admin))) return <Forbidden />;
 
   const isAuthenticated = authenticated === true || false;
-  if (isAuthenticated && !user) return VIEWS["Forbidden"]();
+  if (isAuthenticated && !user) return <Login />;
 
   return (
     <Layout moduleId={moduleId}>
@@ -39,7 +39,7 @@ export const Routes = () => {
           element={<Element route={route} />}
         />
       ))}
-      <Route path="*" element={VIEWS["Page404"]()} />
+      <Route path="*" element={Page404()} />
     </ReactRoutes>
   );
 };

@@ -1,43 +1,41 @@
-import { Flex, Heading } from "@tomato/components";
+import { Column, Flex, Heading } from "@tomato/components";
 
-export const Default = ({ children, ...props }) => (
+export const Default = ({ children }) => (
   <Flex
     sx={{
       minHeight: "100vh",
       overflow: "auto",
-      ...props,
     }}
   >
-    <div
+    <Column
       sx={{
-        flexDirection: "column",
-        // borderRight: "1px solid #ededed",
+        minHeight: "100vh",
         width: 224,
         minWidth: 224,
-        display: "flex",
-        px: 3,
+        p: 3,
         background: "#f4f4f4",
       }}
     >
       <Heading>Sidemenu</Heading>
-    </div>
+    </Column>
 
-    <div
+    <Column
       sx={{
         width: "100%",
-        display: "flex",
+        pt: 3,
       }}
     >
-      <div
+      <Column
         sx={{
-          width: "100%",
           maxWidth: 768,
           mx: "auto",
+          width: "100%",
         }}
       >
         <Heading>Main</Heading>
+
         {children}
-      </div>
-    </div>
+      </Column>
+    </Column>
   </Flex>
 );

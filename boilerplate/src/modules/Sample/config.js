@@ -1,20 +1,15 @@
-import { Edit, List } from "./views";
+import { List } from "./views";
 
 const routes = [
   {
     moduleId: "sample",
     admin: false,
-    authenticated: false,
+    authenticated: true,
     path: "/",
     layout: "Default",
     view: List,
   },
 ];
-
-const views = {
-  Edit,
-  List,
-};
 
 export const sample = {
   id: "source",
@@ -22,5 +17,4 @@ export const sample = {
   icon: "Email",
   name: "Sample",
   routes,
-  views,
 };

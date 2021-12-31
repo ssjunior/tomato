@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { Flex, Image } from "@tomato/components";
+import { Card, Flex, Image } from "@tomato/components";
 import { crud } from "@tomato/core";
 
 export const Edit = () => {
@@ -14,15 +14,22 @@ const Sprites = () => {
   const obj = useSelector((state) => state["sample"]).obj;
 
   return (
-    <Flex sx={{ flexDirection: "column" }}>
-      <div sx={{ my: 3 }}>{t("Sprites")}</div>
+    <>
       {obj &&
-        Object.values(
-          obj.sprites.versions["generation-i"]["red-blue"]
-        ).map((sprite, index) => (
-          <Image key={index} src={sprite} sx={{ maxWidth: "80px" }} />
-        ))}
-    </Flex>
+        Object.values(obj.sprites.versions["generation-i"]["red-blue"]).map(
+          (sprite, index) => (
+            <Card key={index} sx={{ mt: 3, width: "100%" }}>
+              <Flex sx={{ alignItems: "center" }}>
+                <Image
+                  src={sprite}
+                  sx={{ maxWidth: "80px", width: "80px", mr: 3 }}
+                />
+                <div>Name</div>
+              </Flex>
+            </Card>
+          )
+        )}
+    </>
   );
 };
 

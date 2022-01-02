@@ -1,3 +1,5 @@
+import { prepareInitialState } from "@tomato/components";
+
 import { List } from "./views";
 
 const routes = [
@@ -17,4 +19,5 @@ export const sample = {
   icon: "Email",
   name: "Sample",
   routes,
+  initialState: prepareInitialState({}),
 };

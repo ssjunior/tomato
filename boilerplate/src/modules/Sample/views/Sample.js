@@ -1,16 +1,13 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 
-import { Card, Flex, Image } from "@tomato/components";
-import { crud } from "@tomato/core";
+import { Card, crud, Flex, Image } from "@tomato/components";
 
 export const Edit = () => {
   return <div>Edit</div>;
 };
 
 const Sprites = () => {
-  const { t } = useTranslation();
   const obj = useSelector((state) => state["sample"]).obj;
 
   return (

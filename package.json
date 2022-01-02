@@ -2,6 +2,6 @@
   "name": "tomato",
   "private": true,
   "workspaces": [
-    "boilerplate", "components", "core"
+    "boilerplate", "components"
   ]
 }

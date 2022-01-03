@@ -7,7 +7,6 @@ let STORE = {};
 
 export const initStore = ({ reducers = {}, state = {} }) => {
   initState(state);
-  console.log({ ...REDUCERS, ...state });
   STORE = configureStore({
     devTools: process.env.NODE_ENV !== "production",
     reducer: { ...REDUCERS, ...reducers },

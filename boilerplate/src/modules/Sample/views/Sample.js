@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { Card, crud, Flex, Image } from "@tomato/components";
+import { Card, crud, Flex, Image, Spinner } from "@tomato/components";
 
 export const Edit = () => {
   return <div>Edit</div>;
@@ -9,6 +9,8 @@ export const Edit = () => {
 
 const Sprites = () => {
   const obj = useSelector((state) => state["sample"]).obj;
+
+  if (!obj) return <Spinner />;
 
   return (
     <>

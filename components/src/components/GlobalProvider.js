@@ -15,6 +15,7 @@ export const useProvider = () => useContext(Context);
 const ThemeWrapper = ({ children }) => {
   const context = useProvider();
   const theme = THEMES[context.theme];
+  console.log(theme);
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 

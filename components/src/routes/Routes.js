@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 
 import { Flex, Login, Forbidden, Page404 } from "@tomato/components";
 
-export const Routes = ({ routes, layouts }) => {
+export const Routes = ({ routes }) => {
   const Element = ({ route }) => {
     const user = useSelector((state) => state["account"].user);
 
     const { admin, authenticated, moduleId, layout, view, ...props } = route;
 
-    const Layout = layouts[layout];
+    const Layout = layout;
 
     const View = view;
 

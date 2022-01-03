@@ -1,4 +1,4 @@
-import { prepareInitialState } from "@tomato/components";
+import { Default, prepareInitialState } from "@tomato/components";
 
 import { List } from "./views";
 
@@ -8,13 +8,13 @@ const routes = [
     admin: false,
     authenticated: true,
     path: "/",
-    layout: "Default",
+    layout: Default,
     view: List,
   },
 ];
 
 export const sample = {
-  id: "source",
+  id: "sample",
   endpoint: "/sample",
   icon: "Email",
   name: "Sample",

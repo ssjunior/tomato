@@ -1,6 +1,6 @@
 import MODULES from "./modules";
 
-import { getRoutes, GlobalProvider, LAYOUTS, Routes } from "@tomato/components";
+import { getRoutes, GlobalProvider, Routes } from "@tomato/components";
 
 const App = () => {
   const modulesRoutes = getRoutes(MODULES);
@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <GlobalProvider locale="pt-BR" tz="America/Sao_Paulo" theme={"light"}>
-      <Routes routes={routes} layouts={LAYOUTS} />
+      <Routes routes={routes} />
     </GlobalProvider>
   );
 };

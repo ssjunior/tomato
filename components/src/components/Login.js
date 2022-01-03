@@ -23,11 +23,13 @@ export const Login = ({ authUrl }) => {
     >
       <Input
         label="Email"
+        variant="disabled"
         placeholder={t("email@domain.com")}
         width="100%"
         onChange={setEmail}
       />
       <Input
+        variant="enabled"
         label={t("Password")}
         placeholder={t("at least 8 characteres")}
         type="password"

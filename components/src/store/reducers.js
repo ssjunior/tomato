@@ -52,5 +52,4 @@ export const initState = (initialState) => {
     REDUCERS[name] = slice.reducer;
     SLICES[name] = slice;
   });
-  console.log(REDUCERS);
 };

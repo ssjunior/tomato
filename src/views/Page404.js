@@ -1,4 +1,4 @@
-import { Flex } from "tomato";
+import { Flex } from "../components";
 
 export const Page404 = () => (
   <Flex

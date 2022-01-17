@@ -5,7 +5,7 @@ import { Input as InputBase } from "theme-ui";
 import { useTranslation } from "react-i18next";
 import Tippy from "@tippyjs/react";
 
-import { useDebounce } from "tomato";
+import { useDebounce } from "../../hooks";
 
 import { Column } from "../Column";
 import { Flex } from "../Flex";

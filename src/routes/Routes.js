@@ -1,7 +1,9 @@
 import { Route, Routes as ReactRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Clean, Flex, Login, Forbidden, Page404 } from "tomato";
+import { Clean } from "../layouts";
+import { Flex, Login } from "../components";
+import { Forbidden, Page404 } from "../views";
 
 export const Routes = ({ routes }) => {
   const Element = ({ route }) => {

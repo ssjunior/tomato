@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { ThemeProvider } from "theme-ui";
-import { GlobalStyle, THEMES, Toast } from "tomato";
+
+import { GlobalStyle, Toast } from "./";
+import { THEMES } from "../themes";
 
 // import { LoadingBar } from "../LoadingBar";
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Column, Input, Text } from "tomato";
+import { Button, Column, Input, Text } from "./";
 
 export const Login = ({ authUrl }) => {
   const { t } = useTranslation();

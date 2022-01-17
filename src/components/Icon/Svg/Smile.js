@@ -1,7 +1,7 @@
 import Icon from "../Icon";
 
 const RenderIcon = (props) => {
-  let style = {
+  const style = {
     style: {
       strokeWidth: "2px",
       strokeLinecap: "round",

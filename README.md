@@ -1,6 +1,7 @@
 # tomato
 
-## Para começar a usar:
+### Para começar a usar:
 
 yarn install
+
 yarn link

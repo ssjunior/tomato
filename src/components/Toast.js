@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ACTIONS } from "../store/reducers/actions";
+import { ACTIONS } from "../store";
 import { Flex, Icon, Portal, Text } from "./";
 
 const TOAST_COLOR = {
@@ -30,10 +30,12 @@ const RenderIcon = ({ type }) => {
   return (
     <IconRender
       mt="0.25rem"
-      width="1rem"
-      height="1rem"
       stroke={TOAST_COLOR[type].color}
-      style={{ strokeWidth: "2px" }}
+      style={{
+        strokeWidth: "2px",
+        width: "1rem",
+        height: "1rem",
+      }}
     />
   );
 };
@@ -44,7 +46,7 @@ const RenderToast = ({ toast }) => {
 
   const removeToast = useCallback(
     (uuid) => {
-      dispatch(ACTIONS.toast.removeToast(uuid));
+      dispatch(ACTIONS.toast.remove(uuid));
     },
     [dispatch]
   );
@@ -57,7 +59,7 @@ const RenderToast = ({ toast }) => {
     const interval = setInterval(() => {
       const past = (Date.now() - start) / toast.autoClose;
 
-      setCompleted(past);
+      setCompleted(past * 100);
       if (past > 1) {
         clearInterval(interval);
         removeToast(toast.uuid);
@@ -69,53 +71,68 @@ const RenderToast = ({ toast }) => {
 
   return (
     <Flex
-      boxShadow="4px 6px 5px -2px rgba(0,0,0,0.20)"
-      mb="0.5rem"
-      width="20rem"
-      minHeight="2rem"
-      borderRadius="0.25rem"
-      pt="0.5rem"
-      pb="0.75rem"
-      pl="1rem"
-      pr="2rem"
+      px="1rem"
+      py="0.5rem"
+      mb="1rem"
       bg={color.backgroundColor}
-      position="relative"
+      style={{
+        flexDirection: "column",
+        justifyContent: "space-between",
+        boxShadow: "4px 6px 5px -2px rgba(0,0,0,0.20)",
+        width: "20rem",
+        minHeight: "2rem",
+        borderRadius: "0.25rem",
+        position: "relative",
+        alignItems: "flex-start",
+      }}
     >
-      <RenderIcon type={toast.type} />
-
-      <Text
-        ml="0.75rem"
-        color="t1"
-        fontSize="0.9375rem"
-        fontWeight="semibold"
-        borderRight="1px solid lightGrey"
-      >
-        {toast.message}
-      </Text>
-
       <Flex
-        borderLeft="1px solid lightGrey"
-        px="0.5rem"
-        position="absolute"
-        right={0}
+        style={{
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+        }}
       >
-        <Icon.Close
-          style={{ cursor: "pointer", strokeWidth: "2px" }}
-          onClick={() => removeToast(toast.uuid)}
-          width="1rem"
-          height="1rem"
-        />
+        <div>
+          <RenderIcon type={toast.type} />
+        </div>
+
+        <Text
+          mx="0.75rem"
+          sx={{
+            mt: "-0.125rem",
+            width: "100%",
+            color: "t1",
+            fontSize: "0.9375rem",
+            fontWeight: "semibold",
+          }}
+        >
+          {toast.message}
+        </Text>
+
+        <Flex>
+          <Icon.Close
+            style={{ cursor: "pointer", strokeWidth: "2px" }}
+            onClick={() => removeToast(toast.uuid)}
+            width="1rem"
+            height="1rem"
+          />
+        </Flex>
       </Flex>
 
       {toast.autoClose && (
         <Flex
-          left="0.5rem"
-          bottom="0.125rem"
-          position="absolute"
-          width={completed}
-          maxWidth="95%"
-          minHeight="0.25rem"
-          height="0.25rem"
+          style={{
+            left: "0.5rem",
+            bottom: "0.125rem",
+            position: "absolute",
+            width: `${completed}%`,
+            maxWidth: "96%",
+            minHeight: "0.25rem",
+            height: "0.25rem",
+            transitionDuration: "0.1s",
+            transitionProperty: "all",
+          }}
           bg={color.color}
         />
       )}
@@ -123,25 +140,36 @@ const RenderToast = ({ toast }) => {
   );
 };
 
-export const Toast = () => {
-  const toasts = useSelector((state) => state.toast);
+const Toasts = () => {
+  const toasts = useSelector((state) => state["toast"]);
 
   return (
-    <Portal id="toast">
+    <>
       {toasts && toasts.lenght !== 0 && (
         <Flex
-          flexDirection="column-reverse"
-          position="fixed"
-          top="1.25em"
-          right="1.25em"
-          alignItems="flex-end"
-          style={{ zIndex: 100000 }}
+          style={{
+            flexDirection: "column-reverse",
+            alignItems: "flex-end",
+            position: "absolute",
+            right: "1rem",
+            top: "1rem",
+            zIndex: 100000,
+            width: "10px",
+          }}
         >
           {toasts.map((toast) => (
             <RenderToast key={toast.uuid} toast={toast} />
           ))}
         </Flex>
       )}
+    </>
+  );
+};
+
+export const Toast = () => {
+  return (
+    <Portal id="toast">
+      <Toasts />
     </Portal>
   );
 };

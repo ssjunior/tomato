@@ -6,3 +6,4 @@ export * from "./routes";
 export * from "./store";
 export * from "./themes";
 export * from "./views";
+export * from "./util";

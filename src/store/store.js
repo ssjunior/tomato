@@ -12,9 +12,7 @@ export const initStore = ({ reducers = {}, state = {} }) => {
     reducer: { ...REDUCERS, ...reducers },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActionPaths: ["payload.loader"],
-        },
+        serializableCheck: false,
       }).concat(fetchMiddleware),
   });
   return STORE;

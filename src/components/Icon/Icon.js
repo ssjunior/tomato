@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import { SIZES } from "../../constants";
 
-const SVG = styled("svg")`
+export const SVG = styled("svg")`
   width: 18px;
   min-width: 18px;
   height: 18px;
@@ -22,6 +22,14 @@ const SVG = styled("svg")`
       };`;
     return `width: ${props.size}; min-width: ${props.size}; height: ${props.size}; min-height: ${props.size};`;
   }}                               
+
+ ${(props) =>
+    props.hoverStroke &&
+    `
+      &:hover {
+        stoke: ${props.theme.colors[props.hoverStroke]};
+      }
+    `}      
 
   box-sizing: border-box;
   stroke-width: 2px;

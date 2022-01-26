@@ -5,29 +5,12 @@ import { Input as InputBase } from "theme-ui";
 import { useTranslation } from "react-i18next";
 import Tippy from "@tippyjs/react";
 
+import { Column, Flex, Icon, Label, Text } from "../";
+import { MASKS } from "./masks";
 import { useDebounce } from "../../hooks";
 
-import { Column } from "../Column";
-import { Flex } from "../Flex";
-import { Icon } from "../Icon";
-import { Label } from "../Label";
-import { MASKS } from "./masks";
-import { Text } from "../Text";
-
-export const Input1 = ({ label, placeholder, value = "", ...props }) => {
-  return (
-    <Column sx={{ width: "100%", ...props }}>
-      {label && <Label>{label}</Label>}
-      <InputBase
-        value={value}
-        placeholder={placeholder}
-        onKeyUp={(e) => console.log(e)}
-      />
-    </Column>
-  );
-};
-
 export const Input = ({
+  autoComplete,
   debounceTime = 0,
   description,
   disabled,
@@ -65,6 +48,7 @@ export const Input = ({
   const { t } = useTranslation();
 
   const ref = useRef(null);
+  const maskLoaded = useRef(false);
 
   const [error, setError] = useState(
     required && !value ? t("missing value") : false
@@ -86,10 +70,13 @@ export const Input = ({
 
   const disableInput =
     disabled || variant === "disabled" ? { disabled: true } : {};
+
   const dataType = type.toLowerCase();
 
-  console.log(disableInput);
   useEffect(() => {
+    if (maskLoaded.current) return;
+    maskLoaded.current = true;
+
     // console.log(locale, dataType);
     const options = MASKS[locale][dataType];
     const maskOptions = { ...options };
@@ -258,6 +245,8 @@ export const Input = ({
     style.type = "password";
   }
 
+  if (autoComplete) style.autoComplete = autoComplete;
+
   return (
     <Column
       zIndex={10}
@@ -270,12 +259,15 @@ export const Input = ({
       {label && (
         <Flex
           mb="0.125rem"
-          mx="0.25rem"
-          alignItems="center"
-          justifyContent="space-between"
-          minHeight="1.125rem"
+          px="0.25rem"
+          style={{
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "space-between",
+            minHeight: "1.125rem",
+          }}
         >
-          <Flex alignItems="center">
+          <Flex style={{ alignItems: "center" }}>
             <Label>{t(label)}</Label>
 
             {!disabled && required && (
@@ -290,7 +282,7 @@ export const Input = ({
           </Flex>
 
           {typing && maxLength && !disabled && (
-            <Text fontSize="0.75rem" {...maxStyle}>
+            <Text style={{ fontSize: "0.675rem", ...maxStyle }}>
               {maxLength - unMaskedValue.length}
             </Text>
           )}

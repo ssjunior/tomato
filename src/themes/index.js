@@ -1,4 +1,4 @@
-import { base, deep, dark, swiss, tailwind } from "@theme-ui/presets";
+import { base } from "@theme-ui/presets";
 
 import { getColors } from "./colors";
 
@@ -15,7 +15,6 @@ const fontSizes = {
   tertiary: "0.750rem", // 12px
   small: "0.625rem", //10px
   xsmall: "0.5rem", // 8px
-
   label: "0.825rem",
   tag: "0.875rem",
 };
@@ -33,7 +32,7 @@ const forms = {
     transition: "all 250ms",
     border: (theme) => `1px solid ${theme.colors.t5}`,
     "::placeholder": {
-      color: "t4",
+      color: "placeholder",
     },
     color: "t1",
     ":focus": {
@@ -45,7 +44,23 @@ const forms = {
       backgroundColor: "l1",
     },
   },
-
+  textarea: {
+    transition: "all 250ms",
+    fontSize: "1rem",
+    border: (theme) => `1px solid ${theme.colors.t5}`,
+    "::placeholder": {
+      color: "placeholder",
+    },
+    color: "t1",
+    ":focus": {
+      outline: "none",
+      border: (theme) => `1px solid ${theme.colors.focus}`,
+      boxShadow: (theme) => `0px 0px 0px 2px ${theme.colors.focus}`,
+    },
+    ":hover": {
+      backgroundColor: "l1",
+    },
+  },
   clickToEdit: {
     transition: "all 250ms",
     padding: 0,
@@ -62,12 +77,11 @@ const forms = {
       backgroundColor: "l1",
     },
   },
-
   enabled: {
     transition: "all 250ms",
     border: (theme) => `1px solid ${theme.colors.t5}`,
     "::placeholder": {
-      color: "t4",
+      color: "placeholder",
     },
     color: "t1",
     ":focus": {
@@ -90,34 +104,20 @@ const forms = {
 };
 
 export const THEMES = {
-  dark: {
-    ...dark,
-    colors: { ...base.colors, ...getColors("dark") },
-    styles: {
-      ...dark.styles,
-    },
-  },
-  deep: {
-    ...deep,
-    colors: { ...base.colors, ...getColors("light") },
-    styles: {
-      ...deep.styles,
-    },
-  },
   light: {
     ...base,
     breakpoints,
     colors: { ...base.colors, ...getColors("light") },
-    fontSizes,
-    fontWeights,
     styles: {
       ...base.styles,
     },
+    fontSizes,
+    fontWeights,
+    forms,
     text: {
       label: {
         color: "t1",
         fontSize: "label",
-        fontWeight: "semibold",
       },
       title: {
         color: "t1",
@@ -146,19 +146,20 @@ export const THEMES = {
         mb: "2px",
       },
     },
-    forms,
-  },
-  swiss: {
-    ...swiss,
-    colors: { ...base.colors, ...getColors("light") },
-    styles: {
-      ...swiss.styles,
-    },
     buttons: {
       disabled: {
         fontWeight: "bold",
         color: "white",
+        bg: "l3",
+        "&:hover": {
+          bg: "dark",
+        },
+      },
+      primary: {
+        fontWeight: "bold",
+        color: "white",
         bg: "primary",
+        cursor: "pointer",
         "&:hover": {
           bg: "dark",
         },
@@ -172,35 +173,12 @@ export const THEMES = {
         },
       },
     },
-    text: {
-      caps: {
-        textTransform: "uppercase",
-        letterSpacing: ".2em",
-      },
-      heading: {
-        fontFamily: "heading",
-        fontWeight: "heading",
-        lineHeight: "heading",
-      },
-      display: {
-        // extends the text.heading styles
-        variant: "text.heading",
-        fontSize: [6, 7, 8],
-        fontWeight: "display",
-      },
-    },
     cards: {
       primary: {
         padding: 2,
         borderRadius: 4,
         boxShadow: "0 0 4px 1px rgba(0, 0, 0, 0.5)",
       },
-    },
-  },
-  tailwind: {
-    ...tailwind,
-    styles: {
-      ...tailwind.styles,
     },
   },
 };

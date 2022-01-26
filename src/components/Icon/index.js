@@ -1,3 +1,8 @@
+import styled from "@emotion/styled";
+
+import { Flex } from "../Flex";
+export { SVG } from "./Icon";
+
 import Activity from "./Svg/Activity";
 import Add from "./Svg/Add";
 import Admin from "./Svg/Admin";
@@ -292,3 +297,36 @@ Icon.Webhook = Webhook;
 Icon.WhatsApp = WhatsApp;
 Icon.ZoomIn = ZoomIn;
 Icon.ZoomOut = ZoomOut;
+
+const RoundedAction = styled(Flex)(
+  {},
+  `
+  border-radius: 100rem;
+  cursor: pointer;
+  transition: all 350ms ease-in-out;
+  font-size: 0.875rem;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+`
+);
+
+export const IconAction = ({ icon, size = 1, ...props }) => {
+  const RenderIcon = icon ? Icon[icon] : Icon.Plus;
+  const stroke = props.stroke
+    ? { stroke: props.stroke }
+    : { stroke: "currentColor" };
+
+  return (
+    <RoundedAction
+      style={{ padding: `${0.2 * size}rem ` }}
+      bg="l2"
+      hoverColor="blue"
+      hoverBg="lightBlue"
+      {...props}
+    >
+      <RenderIcon {...stroke} size={`${size}rem`} />
+    </RoundedAction>
+  );
+};

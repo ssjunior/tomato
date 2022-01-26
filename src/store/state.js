@@ -1,5 +1,12 @@
 export const prepareInitialState = (state = {}) => {
-  return { obj: null, objs: null, loadingObjId: null, loading: null, ...state };
+  return {
+    object: null,
+    objects: null,
+    loadingObjId: null,
+    loading: null,
+    filter: {},
+    ...state,
+  };
 };
 
 export const getStates = (modules = []) => {
@@ -9,7 +16,3 @@ export const getStates = (modules = []) => {
   });
   return state;
 };
-
-export const INITIAL_STATE = {};
-INITIAL_STATE["account"] = {};
-INITIAL_STATE["network"] = { isLoading: false };

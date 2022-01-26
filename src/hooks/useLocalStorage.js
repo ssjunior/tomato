@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const getInitialState = (localStorageKey, initialValue) => {
   let initValue = localStorage.getItem(localStorageKey);
 
-  if (initValue) {
+  if (initValue !== "undefined") {
     initValue = JSON.parse(initValue);
   } else {
     initValue = null;

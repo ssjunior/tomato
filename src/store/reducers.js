@@ -1,8 +1,11 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 
-import { INITIAL_STATE } from "./state";
+import { INITIAL_STATE } from "./initialState.js";
+
+import { toastActions, toastReducers } from "./reducers/toast";
 
 export const ACTIONS = {
+  toast: toastActions,
   fetch: {
     get: createAction("fetch/get"),
     patch: createAction("fetch/patch"),
@@ -11,7 +14,10 @@ export const ACTIONS = {
   },
 };
 
-export const REDUCERS = {};
+export const REDUCERS = {
+  toast: toastReducers,
+};
+
 const SLICES = {};
 
 const changeState = (state, values, custom) => {
@@ -20,15 +26,23 @@ const changeState = (state, values, custom) => {
     : Object.keys(values).forEach((key) => (state[key] = values[key]));
 };
 
+// Estado default do sistema
 Object.keys(INITIAL_STATE).forEach((name) => {
+  let reducers = {
+    changeState: (state, { payload }) => {
+      changeState(state, payload);
+    },
+  };
+
+  //reducers personalizados
+  if (REDUCERS[name]) {
+    reducers = { ...reducers, ...REDUCERS[name] };
+  }
+
   const slice = createSlice({
     name,
     initialState: INITIAL_STATE[name],
-    reducers: {
-      changeState: (state, { type, payload }) => {
-        changeState(state, payload);
-      },
-    },
+    reducers,
   });
 
   ACTIONS[name] = slice.actions;
@@ -42,7 +56,7 @@ export const initState = (initialState) => {
       name,
       initialState: initialState[name],
       reducers: {
-        changeState: (state, { type, payload }) => {
+        changeState: (state, { payload }) => {
           changeState(state, payload);
         },
       },
@@ -53,3 +67,5 @@ export const initState = (initialState) => {
     SLICES[name] = slice;
   });
 };
+
+// REDUCERS["toast"] = toastReducers;

@@ -1,10 +1,10 @@
 import { Global } from "@emotion/react";
 
-export const GlobalStyle = (props) => {
+export const GlobalStyle = () => {
   return (
     <>
       <Global
-        styles={(theme) => ({
+        styles={() => ({
           body: {
             p: { margin: 0 },
             height: "100vh",
@@ -14,6 +14,12 @@ export const GlobalStyle = (props) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            height: "100vh",
+            overflow: "auto",
+          },
+          "body > #column": {
+            display: "flex",
+            flexDirection: "column",
             height: "100vh",
             overflow: "auto",
           },

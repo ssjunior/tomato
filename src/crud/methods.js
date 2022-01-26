@@ -1,6 +1,56 @@
 import { ACTIONS, STORE } from "../store";
 
-const getOne = ({ attribute, id, loader, path, slice, url }) => {
+const get = ({ attribute, includeCredentials = true, loader, slice, url }) => {
+  const transform = ({ dispatch, state, response }) => {
+    const result = loader ? loader({ dispatch, state, response }) : response;
+    return result;
+  };
+
+  STORE.dispatch(
+    ACTIONS.fetch.get({
+      attribute,
+      slice,
+      url,
+      includeCredentials,
+      loader: transform,
+    })
+  );
+};
+
+const post = ({
+  attribute,
+  includeCredentials = true,
+  loader,
+  slice,
+  payload,
+  url,
+}) => {
+  const transform = ({ dispatch, state, response }) => {
+    const result = loader ? loader({ dispatch, state, response }) : response;
+    return result;
+  };
+
+  STORE.dispatch(
+    ACTIONS.fetch.post({
+      attribute,
+      payload,
+      slice,
+      url,
+      includeCredentials,
+      loader: transform,
+    })
+  );
+};
+
+const getOne = ({
+  attribute,
+  id,
+  loader,
+  path,
+  slice,
+  url,
+  includeCredentials = true,
+}) => {
   const newUrl = `${url}/${id}`;
 
   const transform = (dispatch, getState, response) => {
@@ -14,6 +64,7 @@ const getOne = ({ attribute, id, loader, path, slice, url }) => {
       slice,
       url: newUrl,
       loader: transform,
+      includeCredentials,
     })
   );
 };
@@ -130,8 +181,10 @@ const update = ({
 };
 
 export const crud = {
+  get,
   delete: deleteOne,
   getAll,
   getOne,
+  post,
   update,
 };

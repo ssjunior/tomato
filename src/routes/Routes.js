@@ -2,33 +2,30 @@ import { Route, Routes as ReactRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { Clean } from "../layouts";
-import { Flex, Login } from "../components";
+import { LoginForm } from "../components";
 import { Forbidden, Page404 } from "../views";
 
-export const Routes = ({ routes }) => {
+export const Routes = ({ routes, loginPage }) => {
   const Element = ({ route }) => {
     const user = useSelector((state) => state["account"].user);
 
-    const { admin, authenticated, moduleId, layout, view, ...props } = route;
-
-    const Layout = layout || Clean;
-
-    const View = view;
+    const { admin, authenticated, layout, view, ...props } = route;
 
     const isAdmin = admin === true || false;
-    if (isAdmin && (!user || (user && !user.is_admin))) return <Forbidden />;
+    if (isAdmin && (!user || (user && !user.is_admin))) View = Forbidden;
 
     const isAuthenticated = authenticated === true || false;
-    if (isAuthenticated && !user) return <Login />;
 
-    if (!Layout) return <Flex>Missing layout</Flex>;
-    if (!View) return <Flex>Missing view</Flex>;
+    if (!isAuthenticated || (isAuthenticated && !user)) {
+      View = loginPage || LoginForm;
+      Layout = Clean;
+      return <View />;
+    }
 
-    return (
-      <Layout moduleId={moduleId}>
-        <View moduleId={moduleId} {...props} />
-      </Layout>
-    );
+    let Layout = layout || Clean;
+    let View = view;
+
+    return <Layout {...props} />;
   };
 
   return (

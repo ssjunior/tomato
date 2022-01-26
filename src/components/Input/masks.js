@@ -16,6 +16,7 @@ export const MASKS = {
       lazy: false,
     },
     string: { mask: String },
+    email: { mask: String },
     text: { mask: String },
     password: { mask: String },
     float: {},

@@ -1,6 +1,4 @@
 const compare = (a, b) => {
-    // a = a.toString().toLowerCase()
-    // b = b.toString().toLowerCase()
   if (a < b) {
     return -1;
   }
@@ -12,7 +10,6 @@ const compare = (a, b) => {
 
 export const orderObjects = (objects, field, direction = "asc") => {
   let ordered = [];
-
 
   if (Object.keys(objects).length === 0) return [];
 
@@ -34,22 +31,12 @@ export const orderObjects = (objects, field, direction = "asc") => {
     }
   });
 
-  let list = [];
-  ordered.forEach(objId => {
+  const list = [];
+  ordered.forEach((objId) => {
     list.push(objects[objId]);
   });
 
   return list;
-  // if (!field) {
-  //   let obj;
-  //   let order = ordered.forEach(objId => {
-  //     obj = {};
-  //     obj[objId] = objects[objId];
-  //     return obj;
-  //   });
-  //   return order;
-  // }
-  // return ordered;
 };
 
 export const orderObjectsList = (

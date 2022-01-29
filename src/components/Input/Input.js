@@ -252,8 +252,7 @@ export const Input = ({
       zIndex={10}
       height="fit-content"
       m={label ? 0 : "1px"}
-      position="relative"
-      sx={{ width: "100%", ...props }}
+      sx={{ width: "100%", position: "relative", ...props }}
       {...props}
     >
       {label && (
@@ -290,7 +289,12 @@ export const Input = ({
       )}
 
       {description && (
-        <Text fontSize="0.75rem" mx="0.25rem" mb="0.25rem" color="t3">
+        <Text
+          style={{ fontSize: "0.75rem" }}
+          mx="0.25rem"
+          mb="0.25rem"
+          color="t3"
+        >
           {description}
         </Text>
       )}
@@ -308,16 +312,25 @@ export const Input = ({
       />
 
       {showErrors && (
-        <Flex position="absolute" bottom={-18} alignItems="center" width={1}>
+        <Flex
+          style={{
+            position: "absolute",
+            bottom: -20,
+            alignItems: "center",
+          }}
+        >
           {error && (
             <Text
               px="0.25rem"
               width={1}
               bg={error ? "lightRed" : ""}
-              borderRadius="0.25rem"
-              fontSize="0.75rem"
-              color="red"
-              fontWeight="semibold"
+              sx={{
+                width: "100%",
+                borderRadius: "0.25rem",
+                fontSize: "0.75rem",
+                color: "red",
+                fontWeight: "semibold",
+              }}
             >
               {error}
             </Text>

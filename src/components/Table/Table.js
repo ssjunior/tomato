@@ -76,12 +76,12 @@ export const Td = styled("td")(
   (props) => props.css
 );
 
-const FormatValue = ({ locale, timezone, type, value }) => {
+const FormatValue = ({ locale, timezone, format, value }) => {
   if (!value || typeof value === "undefined") {
     return <Text color="t5">——</Text>;
   }
 
-  if (type === "DateTime") {
+  if (format === "datetime") {
     value = formatDate(value, locale, timezone).distance();
   }
 
@@ -101,7 +101,7 @@ const Head = ({ config }) => {
         />
       </Th>
 
-      {Object.values(config.fields).map((field, index) => (
+      {config.columns.map((field, index) => (
         <Th
           bg="l3"
           key={index}
@@ -165,7 +165,7 @@ const Row = ({ index, object, config, route }) => {
         />
       </Td>
 
-      {Object.values(config.fields).map((field, index) => (
+      {config.columns.map((field, index) => (
         <Td
           key={index}
           color="t2"
@@ -175,7 +175,7 @@ const Row = ({ index, object, config, route }) => {
             textAlign: field.alignment || "left",
           }}
         >
-          <FormatValue type={field.type} value={object[field.name]} />
+          <FormatValue format={field.format} value={object[field.value]} />
         </Td>
       ))}
 

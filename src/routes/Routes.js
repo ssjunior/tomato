@@ -33,7 +33,7 @@ export const Routes = ({ routes, loginPage }) => {
       {routes.map((route, index) => (
         <Route
           key={index}
-          path={route.path}
+          path={route.route}
           element={<Element route={route} />}
         />
       ))}

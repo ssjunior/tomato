@@ -189,6 +189,11 @@ export const Input = ({
     setIsTyping,
   ]);
 
+  const clear = () => {
+    ref.current.value = "";
+    maskedInput.updateValue();
+  };
+
   const changeValue = (e) => {
     setTyping(true);
     setIsTyping && setIsTyping(true);
@@ -213,7 +218,6 @@ export const Input = ({
 
       if (onEnter && unMaskedValue !== savedValue && !error) {
         const value = getValue();
-        console.log(value);
         onEnter(value);
         setSavedValue(maskedInput.unmaskedValue);
         setInitialValue(maskedInput.unmaskedValue);
@@ -307,7 +311,7 @@ export const Input = ({
         {icon && (
           <RenderIcon
             stroke="grey"
-            style={{ position: "absolute", left: "8px" }}
+            style={{ position: "absolute", left: "8px", top: "8px" }}
           />
         )}
 
@@ -324,8 +328,11 @@ export const Input = ({
 
         {enableClear && (
           <Icon.Close
-            onClick={() => onClear && onClear()}
-            stroke="grey"
+            onClick={() => {
+              onClear && onClear();
+              clear();
+            }}
+            stroke={ref.current && ref.current.value ? "grey" : "transparent"}
             style={{ cursor: "pointer", position: "absolute", right: "8px" }}
           />
         )}

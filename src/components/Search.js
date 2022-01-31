@@ -15,8 +15,7 @@ export const Search = ({ onSearch, ...props }) => {
       icon="Search"
       variant="search"
       onSave={(content) => {
-        onSearch && onSearch;
-        console.log(content);
+        onSearch && onSearch(content);
       }}
     />
   );

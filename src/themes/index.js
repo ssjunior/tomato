@@ -39,6 +39,7 @@ const forms = {
     color: "t2",
     ":focus": {
       outline: "none",
+      backgroundColor: (theme) => theme.colors.l0,
       border: (theme) => `1px solid ${theme.colors.focus}`,
       boxShadow: (theme) => `0px 0px 0px 1px ${theme.colors.focus}`,
     },
@@ -106,22 +107,7 @@ const forms = {
       backgroundColor: "l1",
     },
   },
-  clickToEdit: {
-    transition: "all 250ms",
-    padding: 0,
-    borderRadius: 0,
-    border: "1px solid transparent",
-    color: "t1",
-    cursor: "pointer",
-    ":focus": {
-      borderRadius: 0,
-      border: (theme) => `1px solid ${theme.colors.focus}`,
-    },
-    ":hover": {
-      border: (theme) => `1px solid ${theme.colors.t5}`,
-      backgroundColor: "l1",
-    },
-  },
+
   enabled: {
     transition: "all 250ms",
     border: (theme) => `1px solid ${theme.colors.t5}`,

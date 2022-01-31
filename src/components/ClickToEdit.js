@@ -8,10 +8,20 @@ import { useDebounce } from "../hooks";
 
 const TextEdit = styled(Text)(
   {
+    transition: "all 250ms",
     display: "flex",
     outline: 0,
     backgroundColor: "transparent",
   },
+  (props) => {
+    return {
+      "&:focus": {
+        boxShadow: `0px 0px 0px 1px ${props.theme.colors.focus}`,
+        border: `1px solid ${props.theme.colors.focus}`,
+      },
+    };
+  },
+
   (props) => {
     return {
       "&:hover": {
@@ -67,7 +77,6 @@ export const ClickToEdit = ({
   }, [autoSave, debouncedValue, enabled, onSave, value]);
 
   useEffect(() => {
-    console.log(value);
     if (value) {
       editable.current.innerText = value;
     } else editable.current.innerText = placeholder;
@@ -164,11 +173,9 @@ export const ClickToEdit = ({
         value={value}
         editing={editing}
         contentEditable={editing}
-        px="5rem"
         style={{
           borderRadius: "0.25rem",
           minWidth: "1rem",
-          // maxWidth: "3rem",
           overflow: "hidden",
         }}
         onBlur={saveEdit}

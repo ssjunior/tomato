@@ -42,11 +42,12 @@ export const ClickToEdit = ({
   value = "",
   autoFocus = false,
   onEnter,
+  onFocus,
   onBlur,
   onChange,
   maxLength = 191,
-  enabled = false,
-  enableEmpty = false,
+  enabled = true,
+  enableEmpty = true,
   enableCounter = true,
   placeholder,
   ...props
@@ -66,6 +67,7 @@ export const ClickToEdit = ({
   }, [autoSave, debouncedValue, enabled, onSave, value]);
 
   useEffect(() => {
+    console.log(value);
     if (value) {
       editable.current.innerText = value;
     } else editable.current.innerText = placeholder;
@@ -148,7 +150,7 @@ export const ClickToEdit = ({
     const len = e.target.innerText.trim().length;
     setRemaining(maxLength - len);
     onChange && onChange(editable.current.innerText);
-    autoSave && enabled && setContent(editable.current.innerText);
+    // autoSave && enabled && setContent(editable.current.innerText);
   };
 
   const style = {};
@@ -162,11 +164,15 @@ export const ClickToEdit = ({
         value={value}
         editing={editing}
         contentEditable={editing}
+        px="5rem"
         style={{
           borderRadius: "0.25rem",
           minWidth: "1rem",
+          // maxWidth: "3rem",
+          overflow: "hidden",
         }}
         onBlur={saveEdit}
+        onFocus={() => onFocus && onFocus}
         onClick={(e) => startEdit(e)}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}

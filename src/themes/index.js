@@ -15,8 +15,8 @@ const fontSizes = {
   tertiary: "0.750rem", // 12px
   small: "0.625rem", //10px
   xsmall: "0.5rem", // 8px
-  label: "0.825rem",
-  tag: "0.875rem",
+  label: "0.8rem",
+  tag: "0.8125rem",
 };
 
 const fontWeights = {
@@ -29,8 +29,52 @@ const fontWeights = {
 
 const forms = {
   default: {
+    padding: "0.5rem 0.75rem",
     transition: "all 250ms",
     border: (theme) => `1px solid ${theme.colors.t5}`,
+    fontSize: "0.9375rem",
+    "::placeholder": {
+      color: "placeholder",
+    },
+    color: "t2",
+    ":focus": {
+      outline: "none",
+      border: (theme) => `1px solid ${theme.colors.focus}`,
+      boxShadow: (theme) => `0px 0px 0px 1px ${theme.colors.focus}`,
+    },
+    ":hover": {
+      backgroundColor: "l1",
+    },
+  },
+  search: {
+    padding: "0.375rem 2rem",
+    fontSize: "0.875rem",
+    border: `1px solid transparent`,
+    color: "t3",
+    height: "fit-content",
+    bg: "l2",
+    "&:hover": {
+      bg: "l3",
+    },
+    transition: "all 250ms",
+    "::placeholder": {
+      color: "placeholder",
+    },
+    ":focus": {
+      outline: "none",
+      border: (theme) => `1px solid ${theme.colors.focus}`,
+      boxShadow: (theme) => `0px 0px 0px 1px ${theme.colors.focus}`,
+    },
+    ":hover": {
+      backgroundColor: "l3",
+    },
+  },
+  error: {
+    padding: "0.5rem 0.75rem",
+    transition: "all 250ms",
+    border: (theme) => `1px solid ${theme.colors.red}`,
+    boxShadow: (theme) => `0px 0px 0px 1px ${theme.colors.red}`,
+    fontSize: "0.9375rem",
     "::placeholder": {
       color: "placeholder",
     },
@@ -38,13 +82,14 @@ const forms = {
     ":focus": {
       outline: "none",
       border: (theme) => `1px solid ${theme.colors.focus}`,
-      boxShadow: (theme) => `0px 0px 0px 2px ${theme.colors.focus}`,
+      boxShadow: (theme) => `0px 0px 0px 1px ${theme.colors.focus}`,
     },
     ":hover": {
       backgroundColor: "l1",
     },
   },
   textarea: {
+    padding: "0.5rem 0.75rem",
     transition: "all 250ms",
     fontSize: "1rem",
     border: (theme) => `1px solid ${theme.colors.t5}`,
@@ -116,7 +161,9 @@ export const THEMES = {
     forms,
     text: {
       label: {
-        color: "t1",
+        color: "t3",
+        // marginLeft: "0.25rem",
+        marginBottom: "0.125rem",
         fontSize: "label",
       },
       cardTitle: {
@@ -175,13 +222,57 @@ export const THEMES = {
         },
       },
       primary: {
-        fontWeight: "bold",
+        transition: "all 250ms",
         color: "white",
-        bg: "primary",
         cursor: "pointer",
+        padding: "0.375rem 1rem",
+        fontSize: "0.875rem",
+        height: "fit-content",
+        bg: "hsl(216, 100%, 42%)",
         "&:hover": {
-          bg: "dark",
+          bg: "hsl(216, 100%, 50%)",
         },
+        "&:active": {
+          bg: "hsl(218, 40%, 25%)",
+          color: "white",
+        },
+      },
+      action: {
+        transition: "all 250ms",
+        padding: "0.375rem 0.75rem",
+        fontSize: "0.875rem",
+        cursor: "pointer",
+        color: "t3",
+        bg: "l2",
+        "&:hover": {
+          bg: "lightBlue",
+          color: "blue",
+        },
+      },
+      dropdown: {
+        padding: "0.375rem 0.5rem 0.375rem 1rem",
+        fontSize: "0.875rem",
+        border: `1px solid transparent`,
+        cursor: "pointer",
+        color: "t3",
+        height: "fit-content",
+        bg: "l2",
+        "::placeholder": {
+          color: "placeholder",
+        },
+
+        "&:hover": {
+          bg: "l3",
+        },
+      },
+      dropdownOpen: {
+        padding: "0.375rem 0.5rem 0.375rem 1rem",
+        fontSize: "0.875rem",
+        border: `1px solid transparent`,
+        cursor: "pointer",
+        color: "white",
+        height: "fit-content",
+        bg: "hsl(218, 40%, 25%)",
       },
       secondary: {
         fontWeight: "bold",

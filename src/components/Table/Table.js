@@ -51,7 +51,7 @@ export const Th = styled("th")(
     height: "2rem",
     position: "sticky",
     top: 0,
-    fontSize: "0.9375rem",
+    fontSize: "0.875rem",
     fontWeight: 600,
   },
   base,
@@ -66,7 +66,7 @@ export const Td = styled("td")(
   {
     height: "2rem",
     whiteSpace: "wrap",
-    fontSize: "0.9375rem",
+    fontSize: "0.875rem",
   },
   base,
   variant,
@@ -91,7 +91,7 @@ const FormatValue = ({ locale, timezone, format, value }) => {
 const Head = ({ config }) => {
   return (
     <Tr>
-      <Th bg="l3" style={{ width: "40px", textAlign: "center" }}>
+      <Th bg="l1" style={{ width: "40px", textAlign: "center" }}>
         <input
           type="checkbox"
           // defaultChecked={
@@ -103,13 +103,14 @@ const Head = ({ config }) => {
 
       {config.columns.map((field, index) => (
         <Th
-          bg="l3"
+          bg="l1"
           key={index}
           style={{
             whiteSpace: "nowrap",
             width: field.width + "px",
             textAlign: field.alignment || "left",
           }}
+          sx={{ color: "t3" }}
         >
           {field.label}
           {field.ordenable && (
@@ -132,7 +133,7 @@ const Head = ({ config }) => {
           )}
         </Th>
       ))}
-      <Th bg="l3"></Th>
+      <Th bg="l1"></Th>
     </Tr>
   );
 };
@@ -141,7 +142,7 @@ const Row = ({ index, object, config, route }) => {
   const navigate = useNavigate();
 
   const sx = {
-    height: "2rem",
+    height: "3rem",
     cursor: "pointer",
     borderTop: index ? `1px solid #e6e6e6` : "",
   };
@@ -168,7 +169,7 @@ const Row = ({ index, object, config, route }) => {
       {config.columns.map((field, index) => (
         <Td
           key={index}
-          color="t2"
+          color="t3"
           style={{
             whiteSpace: "nowrap",
             width: field.width + "px",

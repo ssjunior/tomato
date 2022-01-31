@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Column } from "./Column";
 import { Text } from "./Text";
 
-export const Base = styled(Column)(
+const Base = styled(Column)(
   {
     alignItems: "center",
     borderRadius: "0.5rem",

@@ -10,6 +10,8 @@ export const Action = styled(Flex)`
   height: fit-content;
   align-items: center;
   font-weight: 500;
+  font-size: 0.875rem;
+  as: button;
   ${(props) =>
     `
 	  color: ${props.theme.colors["t2"]};
@@ -22,6 +24,7 @@ export const Action = styled(Flex)`
 `;
 
 Action.defaultProps = {
+  as: "button",
   fontSize: "0.875rem",
   paddingTop: "0.25rem",
   paddingBottom: "0.25rem",

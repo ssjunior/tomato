@@ -19,14 +19,15 @@ export const Input = ({
   mask,
   maxLength,
   minLength,
+  icon,
   // minValue,
   // maxValue,
   autoExpand,
   clearOnEnter,
-  // enableClear,
+  enableClear,
   // focus,
   onBlur,
-  // onClear,
+  onClear,
   onEnter,
   onEsc,
   onChange,
@@ -247,6 +248,8 @@ export const Input = ({
 
   if (autoComplete) style.autoComplete = autoComplete;
 
+  const RenderIcon = icon ? Icon[icon] : null;
+
   return (
     <Column
       zIndex={10}
@@ -257,8 +260,7 @@ export const Input = ({
     >
       {label && (
         <Flex
-          mb="0.125rem"
-          px="0.25rem"
+          pr="0.25rem"
           style={{
             width: "100%",
             alignItems: "center",
@@ -299,17 +301,35 @@ export const Input = ({
         </Text>
       )}
 
-      <InputBase
-        {...disableInput}
-        variant={variant}
-        placeholder={disabled ? t("no data") : t(placeholder) || ""}
-        ref={ref}
-        onBlur={setOnBlur}
-        onKeyUp={(e) => changeValue(e)}
-        onFocus={onFocus}
-        // bg={getColor("white")}
-        {...style}
-      />
+      <Flex
+        style={{ position: "relative", alignItems: "center", width: "100%" }}
+      >
+        {icon && (
+          <RenderIcon
+            stroke="grey"
+            style={{ position: "absolute", left: "8px" }}
+          />
+        )}
+
+        <InputBase
+          {...disableInput}
+          variant={showErrors && error ? "error" : variant}
+          placeholder={disabled ? t("no data") : t(placeholder) || ""}
+          ref={ref}
+          onBlur={setOnBlur}
+          onKeyUp={(e) => changeValue(e)}
+          onFocus={onFocus}
+          {...style}
+        />
+
+        {enableClear && (
+          <Icon.Close
+            onClick={() => onClear && onClear()}
+            stroke="grey"
+            style={{ cursor: "pointer", position: "absolute", right: "8px" }}
+          />
+        )}
+      </Flex>
 
       {showErrors && (
         <Flex
@@ -323,7 +343,7 @@ export const Input = ({
             <Text
               px="0.25rem"
               width={1}
-              bg={error ? "lightRed" : ""}
+              // bg={error ? "lightRed" : ""}
               sx={{
                 width: "100%",
                 borderRadius: "0.25rem",

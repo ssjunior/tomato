@@ -2,7 +2,7 @@ import React from "react";
 
 import { Box, Column, Label } from "../";
 
-export const Base = React.forwardRef(function Textarea(props, ref) {
+const Base = React.forwardRef(function Textarea(props, ref) {
   return (
     <Box
       ref={ref}

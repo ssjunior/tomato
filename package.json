@@ -21,6 +21,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-transition-group": "^4.4.2",
+    "react-virtuoso": "^2.5.1",
     "recharts": "^2.1.8",
     "theme-ui": "^0.13.1",
     "tippy.js": "^6.3.7"

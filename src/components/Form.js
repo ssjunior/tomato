@@ -219,8 +219,8 @@ const Row = ({ object, row }) => {
       }}
     >
       {Array.isArray(row) ? (
-        row.map((column, index) => (
-          <RenderItem key={index} item={column} object={object} />
+        row.map((item, index) => (
+          <RenderItem key={index} item={item} object={object} />
         ))
       ) : (
         <RenderItem item={row} object={object} />
@@ -235,8 +235,6 @@ const Section = ({ index, object, section }) => {
       mt={index ? "3rem" : "0"}
       style={{ width: "100%", maxWidth: "50rem" }}
     >
-      <Text>{section.name}</Text>
-
       {section.rows &&
         section.rows.map((row, index) => (
           <Row key={index} object={object} row={row} />
@@ -245,9 +243,10 @@ const Section = ({ index, object, section }) => {
   );
 };
 
-export const Form = ({ filterSections = false, object, schema, ...props }) => {
+export const Form = ({ object, schema, ...props }) => {
   return (
     <Column
+      px="2rem"
       style={{ width: "100%", height: "100%", overflow: "auto" }}
       {...props}
     >
